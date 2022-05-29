@@ -4,11 +4,8 @@ import loc from '../support/locators'
 
 describe('Should test at a funcional level', () => {
     before(() => {
-        cy.visit('http://barrigareact.wcaquino.me/')
-        cy.get(loc.LOGIN.USER).type('luiza@luiza.com.br')
-        cy.get(loc.LOGIN.PSSWD).type('123')
-        cy.get(loc.LOGIN.BTN_LOGIN).click()
-        cy.get(loc.MSG).should('contain', 'Bem vindo')
+        cy.login('luiza@luiza.com.br', '123')
+        cy.resetApp()
     })
 
     it('Should create an account', () => {
@@ -23,6 +20,7 @@ describe('Should test at a funcional level', () => {
         cy.get(loc.MENU.SETTINGS).click()
         cy.get(loc.MENU.ACCOUNT).click()
         //o locator "edit" é frágil por estar determinando a posição na página
+        //por isso foi necessário o xpath
         // cy.get(':nth-child(7) > :nth-child(2) > :nth-child(1) > .far')
         cy.xpath(loc.ACCOUNTS.XP_BTN_EDIT).click()
         cy.get(loc.ACCOUNTS.NAME)
