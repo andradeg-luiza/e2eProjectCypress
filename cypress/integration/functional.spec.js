@@ -28,4 +28,11 @@ describe('Should test at a funcional level', () => {
         cy.get(loc.MSG).should('contain', 'Conta atualizada com sucesso')
 
     })
+
+    it('Should note create an account with same name', () => {
+        cy.accessMenuAccount()
+        cy.insertAccount('Conta 2 alterada')
+        cy.get(loc.ACCOUNTS.BTN_SAVE).click()
+        cy.get(loc.MSG).should('contain', 'status code 400')
+    })
 })
