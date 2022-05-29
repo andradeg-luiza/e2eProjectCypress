@@ -28,8 +28,8 @@ import loc from './locators'
 
 Cypress.Commands.add('login', (user, psswd) => {
     cy.visit('http://barrigareact.wcaquino.me/')
-    cy.get(loc.LOGIN.USER).type('luiza@luiza.com.br')
-    cy.get(loc.LOGIN.PSSWD).type('123')
+    cy.get(loc.LOGIN.USER).type(user)
+    cy.get(loc.LOGIN.PSSWD).type(psswd)
     cy.get(loc.LOGIN.BTN_LOGIN).click()
     cy.get(loc.MSG).should('contain', 'Bem vindo')
 })
