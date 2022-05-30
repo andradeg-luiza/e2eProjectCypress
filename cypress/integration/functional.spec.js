@@ -35,4 +35,17 @@ describe('Should test at a funcional level', () => {
         cy.get(loc.ACCOUNTS.BTN_SAVE).click()
         cy.get(loc.MSG).should('contain', 'status code 400')
     })
+
+    it('Should create a transaction', () => {
+        cy.get(loc.MENU.MOVIMENT).click()
+        cy.get(loc.MOVIMENT.DESCRIPTION).type('Desc')
+        cy.get(loc.MOVIMENT.AMOUNT).type('123')
+        cy.get(loc.MOVIMENT.INVOLVED).type('Inter')
+        cy.get(loc.MOVIMENT.BTN_SAVE).click()
+        cy.get(loc.MSG).should('contain', 'inserida com sucesso')
+        //outras possíveis validações
+        cy.get(loc.STATEMENT.LINES).should('have.length', 7)
+        cy.xpath(loc.STATEMENT.XP_SEARCH_ELEMENT).should('exist')
+    })
+
 })
