@@ -11,7 +11,7 @@ describe('Should test at a funcional level', () => {
 
     it('Should create an account', () => {
         cy.accessMenuAccount()
-        cy.insertAccount('Conta teste 2')
+        cy.insertAccount('Conta de teste')
         cy.get(loc.MSG).should('contain', 'Conta inserida com sucesso!')
     })
 
@@ -20,10 +20,10 @@ describe('Should test at a funcional level', () => {
         //o locator "edit" é frágil por estar determinando a posição na página
         //por isso foi necessário o xpath
         // cy.get(':nth-child(7) > :nth-child(2) > :nth-child(1) > .far')
-        cy.xpath(loc.ACCOUNTS.XP_BTN_EDIT).click()
+        cy.xpath(loc.ACCOUNTS.FN_XP_BTN_EDIT('Conta de teste')).click()
         cy.get(loc.ACCOUNTS.NAME)
             .clear()
-            .type('Conta 2 alterada')
+            .type('Conta alterada')
         cy.get(loc.ACCOUNTS.BTN_SAVE).click()
         cy.get(loc.MSG).should('contain', 'Conta atualizada com sucesso')
 
@@ -31,7 +31,7 @@ describe('Should test at a funcional level', () => {
 
     it('Should note create an account with same name', () => {
         cy.accessMenuAccount()
-        cy.insertAccount('Conta 2 alterada')
+        cy.insertAccount('Conta alterada')
         cy.get(loc.ACCOUNTS.BTN_SAVE).click()
         cy.get(loc.MSG).should('contain', 'status code 400')
     })
@@ -41,11 +41,19 @@ describe('Should test at a funcional level', () => {
         cy.get(loc.MOVIMENT.DESCRIPTION).type('Desc')
         cy.get(loc.MOVIMENT.AMOUNT).type('123')
         cy.get(loc.MOVIMENT.INVOLVED).type('Inter')
+        cy.get(loc.MOVIMENT.ACCOUNT).select('Conta alterada')
+        cy.get(loc.MOVIMENT.STATUS).click()
         cy.get(loc.MOVIMENT.BTN_SAVE).click()
         cy.get(loc.MSG).should('contain', 'inserida com sucesso')
         //outras possíveis validações
         cy.get(loc.STATEMENT.LINES).should('have.length', 7)
-        cy.xpath(loc.STATEMENT.XP_SEARCH_ELEMENT).should('exist')
+        cy.xpath(loc.STATEMENT.FN_XP_SEARCH_ELEMENT('Desc', '123')).should('exist')
+    })
+
+    it('Should get balance', () => {
+        cy.get(loc.MENU.HOME).click()
+        cy.xpath(loc.BALANCE.FN_XP_BALANCE_ACCOUNT('Conta alterada'))
+            .should('contain', '123,00')
     })
 
 })
