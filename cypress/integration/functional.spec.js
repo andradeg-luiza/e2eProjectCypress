@@ -13,7 +13,7 @@ describe('Should test at a funcional level', () => {
         cy.resetApp()
     })
 
-    it.only('Should create an account', () => {
+    it('Should create an account', () => {
         cy.accessMenuAccount()
         cy.insertAccount('Conta de teste')
         cy.get(loc.MSG).should('contain', 'Conta inserida com sucesso!')
@@ -54,10 +54,24 @@ describe('Should test at a funcional level', () => {
         cy.xpath(loc.STATEMENT.FN_XP_SEARCH_ELEMENT('Desc', '123')).should('exist')
     })
 
-    it('Should get balance', () => {
+    it.only('Should get balance', () => {
         cy.get(loc.MENU.HOME).click()
         cy.xpath(loc.BALANCE.FN_XP_BALANCE_ACCOUNT('Conta para saldo'))
             .should('contain', '534,00')
+
+        cy.get(loc.MENU.EXTRATO).click()
+        cy.xpath(loc.STATEMENT.FN_XP_EDIT_ELEMENT('Movimentacao 1, calculo saldo')).click()
+        //espera determinada não é funcional, mas nesse caso tenho um problema de sincronismo
+        cy.wait(3000)
+        // cy.get(loc.MOVIMENT.DESCRIPTION).should('have.value', 'Movimentacao 1, calculo saldo')
+        cy.get(loc.MOVIMENT.STATUS).click()
+        cy.get(loc.MOVIMENT.BTN_SAVE).click()
+        cy.get(loc.MSG).should('contain', 'resetados com sucesso')
+
+        cy.get(loc.MENU.HOME).click()
+        cy.xpath(loc.BALANCE.FN_XP_BALANCE_ACCOUNT('Conta para saldo'))
+            .should('contain', '4.034,00')
+
     })
 
     it('Should remove a transaction', () => {

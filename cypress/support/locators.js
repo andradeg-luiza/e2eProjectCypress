@@ -33,7 +33,8 @@ const locators = {
     STATEMENT: {
         LINES: '.list-group > li',
         FN_XP_SEARCH_ELEMENT: (desc, value) => `//span[contains(., '${desc}')]/following-sibling::small[contains(., '${value}')]`,
-        FN_XP_REMOVE_ELEMENT: account => `//span[contains(., '${account}')]/../../..//i[@class='far fa-trash-alt']`
+        FN_XP_REMOVE_ELEMENT: account => `//span[contains(., '${account}')]/../../..//i[@class='far fa-trash-alt']`,
+        FN_XP_EDIT_ELEMENT: account => `//span[contains(., '${account}')]/../../..//i[@class='fas fa-edit']`
     },
 
     BALANCE: {
