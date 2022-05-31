@@ -10,6 +10,15 @@ describe('Should test at a funcional level', () => {
     })
 
     it('Should create an account', () => {
+        cy.request({
+            method: 'POST',
+            url: 'https://barrigarest.wcaquino.me/signin',
+            body: {
+                email: "luiza@luiza.com.br",
+                redirecionar: false,
+                senha: "123"
+            }
+        }).its('body.token').should('not.be.empty')
     })
 
     it('Should update an account', () => {
@@ -21,7 +30,7 @@ describe('Should test at a funcional level', () => {
     it('Should create a transaction', () => {
     })
 
-    it.only('Should get balance', () => {
+    it('Should get balance', () => {
     })
 
     it('Should remove a transaction', () => {
