@@ -56,4 +56,10 @@ describe('Should test at a funcional level', () => {
             .should('contain', '123,00')
     })
 
+    it('Should remove a transaction', () => {
+        cy.get(loc.MENU.EXTRATO).click()
+        cy.xpath(loc.STATEMENT.FN_XP_REMOVE_ELEMENT('Desc')).click()
+        cy.get(loc.MSG).should('contain', 'removida com sucesso')
+    })
+
 })

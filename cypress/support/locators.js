@@ -11,7 +11,8 @@ const locators = {
         SETTINGS: '[data-test="menu-settings"]',
         ACCOUNT: '[href="/contas"]',
         RESET: '[href="/reset"]',
-        MOVIMENT: '[data-test="menu-movimentacao"]'
+        MOVIMENT: '[data-test="menu-movimentacao"]',
+        EXTRATO: '[data-test="menu-extrato"]'
     },
 
     ACCOUNTS: {
@@ -31,7 +32,8 @@ const locators = {
 
     STATEMENT: {
         LINES: '.list-group > li',
-        FN_XP_SEARCH_ELEMENT: (desc, value) => `//span[contains(., '${desc}')]/following-sibling::small[contains(., '${value}')]`
+        FN_XP_SEARCH_ELEMENT: (desc, value) => `//span[contains(., '${desc}')]/following-sibling::small[contains(., '${value}')]`,
+        FN_XP_REMOVE_ELEMENT: account => `//span[contains(., '${account}')]/../../..//i[@class='far fa-trash-alt']`
     },
 
     BALANCE: {
