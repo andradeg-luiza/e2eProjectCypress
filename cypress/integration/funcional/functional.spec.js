@@ -54,7 +54,7 @@ describe('Should test at a funcional level', () => {
         cy.xpath(loc.STATEMENT.FN_XP_SEARCH_ELEMENT('Desc', '123')).should('exist')
     })
 
-    it.only('Should get balance', () => {
+    it('Should get balance', () => {
         cy.get(loc.MENU.HOME).click()
         cy.xpath(loc.BALANCE.FN_XP_BALANCE_ACCOUNT('Conta para saldo'))
             .should('contain', '534,00')
